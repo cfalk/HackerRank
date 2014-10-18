@@ -72,6 +72,7 @@ def makeUniformColors(grid):
 
   return uniform_grid, col_set
 
+
 def makeColorGraph(grid, colors):
   def getColorCounts(grid, colors):
     num_cols = len(grid[0])
@@ -81,7 +82,7 @@ def makeColorGraph(grid, colors):
       for row in grid:
         color = row[i]
         counts[-1][color] += 1
-    return counts
+    return counts[::-1]
 
   def getColorArrays(col_dicts):
     arrays = []
@@ -127,6 +128,7 @@ def writeImage(rgb_grid):
   b = Image.fromarray(getColorBand(2), "L")
   image = Image.merge("RGB", (r,g,b))
   image.save("newImage.jpg")
+
 
 def getPixelRange(i, j, grid, radius, noBlack=True):
   def L2(p1,p2):
@@ -192,7 +194,7 @@ def amplifyBlack(grid):
 
 
 def main():
-  rgb_grid = getImageGrid("cube1solved.jpg")
+  rgb_grid = getImageGrid("cube4solved.jpg")
 
   rgb_grid = removeBackground(rgb_grid)
   rgb_grid = amplifyBlack(rgb_grid)
